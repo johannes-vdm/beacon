@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const path = require('path');
 
 // Set a 30-minute timeout for the response
 const TIMEOUT = 30 * 60; // 30 minutes in milliseconds
