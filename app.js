@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 
 // Set a 30-minute timeout for the response
-const TIMEOUT = 30 * 60 * 1000; // 30 minutes in milliseconds
+const TIMEOUT = 30 * 60; // 30 minutes in milliseconds
 
 // Keep track of connected clients
 const clients = new Set();
@@ -28,7 +28,33 @@ app.post('/api/forward', (req, res) => {
 
 // Endpoint for serving the HTML page with the latest JSON response
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <title>Beacon App</title>
+      </head>
+      <style>
+        body {
+          background-color: black;
+          color: white;
+          font-family: 'Courier New', Courier, monospace;
+        }
+      </style>
+      <body>
+        <h1 id="data"></h1>
+        <script>
+          const source = new EventSource('/watchtower');
+          const pre = document.getElementById('data');
+          source.addEventListener('message', event => {
+            pre.textContent = event.data;
+          });
+        </script>
+      </body>
+    </html>
+  `;
+  res.send(html);
 });
 
 // Endpoint for serving the data received from Python server as server-sent events
