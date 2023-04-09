@@ -79,9 +79,6 @@ app.get('/watchtower', (req, res) => {
   });
 });
 
-// Start the server
-const server = app.listen(process.env.PORT || 3000, () => console.log('Watchtower app listening on port 3000!'));
-
 // Set a 30-minute timeout for the response
 app.use((req, res, next) => {
   res.setTimeout(TIMEOUT, () => {
