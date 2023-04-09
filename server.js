@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 // Set a 30-minute timeout for the response
-const TIMEOUT = 30 * 60; // 30 minutes in milliseconds
+const TIMEOUT = 30 * 60 * 1000; // 30 minutes in milliseconds
 
 // Keep track of connected clients
 const clients = new Set();
@@ -78,6 +78,9 @@ app.get('/watchtower', (req, res) => {
     clients.delete(res);
   });
 });
+
+// Start the server
+app.listen(process.env.PORT || 3000, () => console.log('Watchtower app listening on port!'));
 
 // Set a 30-minute timeout for the response
 app.use((req, res, next) => {
