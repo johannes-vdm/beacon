@@ -7,9 +7,14 @@
   <script>
     const socket = io();
 
-    socket.on('latestResponse', (data) => {
-      document.getElementById('response').innerHTML = data.data;
+    socket.on('latestResponse', (response) => {
+      document.getElementById('info').innerHTML = `${response.info}`;
+      document.getElementById('response').innerHTML = `${response.data}`;
     });
+
+    function truncate(str, n) {
+      return (str.length > n) ? str.slice(0, n - 1) + '&hellip;' : str;
+    };
   </script>
   <style>
     * {
@@ -31,13 +36,23 @@
       align-items: center;
       padding: 1em;
     }
+
+    #info {
+      color: grey;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   </style>
 </head>
 
 <body>
   <div id="content">
     <h1>🗼</h1>
+    <br>
     <div id="response">No Response</div>
+    <p id="info">No Info</p>
   </div>
 </body>
 
