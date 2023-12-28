@@ -1,6 +1,6 @@
 <a href="https://github.com/johannes-vdm/express-beacon" target="_blank">View Source Code</a>
 
-![MarineGEO circle logo]("./public/beacon.png" "Beacon Image")
+![MarineGEO circle logo](public/beacon.png)
 
 This documentation provides an overview of the Node.js code that uses the Express framework, the Socket.IO library, and the Body-Parser middleware to set up a server that can handle post requests to an API endpoint. The server sends real-time updates to connected clients using Socket.IO.
 
